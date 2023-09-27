@@ -1,0 +1,26 @@
+/* rtl */
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100;200;300;400;500;600;700&family=Almarai:wght@300;400;700;800&family=Noto+Kufi+Arabic:wght@100;200;300;400;500;600;700&display=swap');
+/* font-family: 'Alexandria', sans-serif;
+font-family: 'Almarai', sans-serif;
+font-family: 'Noto Kufi Arabic', sans-serif; */
+/* Fonts */
+
+
+.nice-select {
+    padding-left: 30px;
+    padding-right: 18px;
+  }
+ 
+
+  .nice-select:after {
+    right: unset !important;
+    left: 12px;
+    border-bottom: 2px solid #444;
+    border-right: 2px solid #444;
+  }
+
+  .nice-select .option{
+    text-align: start;
+    padding-inline-start: 18px;
+      padding-inline-end: 29px;
+  }
