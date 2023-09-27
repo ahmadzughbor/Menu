@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="whatsappLink">Address </label>
+                    <label for="whatsappLink">Address  ar</label>
                     <input type="text" value="@isset($settings) {{ $settings->getTranslation('Address', 'ar') }} @endisset " name="Address" class="form-control" id="Address" placeholder="Address">
                 </div>
             </div>
@@ -66,12 +66,28 @@
                     <input type="file" name="app_logo" class="form-control" id="app_logo" placeholder="app_logo">
                 </div>
             </div>
-            @if($settings)
-            @if($settings->app_logo)
-            <img src="{{asset('storage/images/' . $settings->app_logo)}}" alt="" width="50" height="50">
-            @endif
-            @endif
+          
         </div>
+        @if($settings)
+            @if($settings->app_logo)
+            <img src="{{asset('storage/images/' . $settings->app_logo)}}" alt="" width="60" height="60">
+            @endif
+            @endif
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="snapchatLink">site background image</label>
+
+                    <input type="file" name="background_image" class="form-control" id="background_image" placeholder="background_image">
+                </div>
+            </div>
+            
+        </div>
+        @if($settings)
+            @if($settings->background_image)
+            <img src="{{asset('storage/images/' . $settings->background_image)}}" alt="" width="80px" height="80px">
+            @endif
+            @endif
 
         <div class="col-md-12">
             <button id="saveBtn" class="btn btn-primary mt-3">Save</button>

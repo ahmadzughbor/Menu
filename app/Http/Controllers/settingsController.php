@@ -34,7 +34,7 @@ class settingsController extends Controller
 
         $settings = settings::first();
         $file = $request->file('app_logo'); // Replace 'file' with your input name
-
+        $background_image = $request->file('background_image');
         if($file){
 
             $fileName = time() . '.' . $file->getClientOriginalExtension();
@@ -42,6 +42,14 @@ class settingsController extends Controller
             $file->storeAs('public/images', $fileName);
         }else{
             $fileName = $settings->app_logo;
+        }
+        if($background_image){
+
+            $backgroundName = time() . '.' . $background_image->getClientOriginalExtension();
+            
+            $background_image->storeAs('public/images', $backgroundName);
+        }else{
+            $backgroundName = $settings->app_logo;
         }
         $data =[];
         $data['Address'] = [
@@ -54,6 +62,7 @@ class settingsController extends Controller
         $data['facebook'] = $request->facebook ?? null;
         $data['instagram'] = $request->instagram ?? null;
         $data['app_logo'] = $fileName ?? null;
+        $data['background_image'] = $backgroundName ?? null;
 
         // dd($data['app_logo'] );
         if ($settings) {
@@ -61,6 +70,7 @@ class settingsController extends Controller
         } else {
             $request->validate([
                 'app_logo' =>'image|mimes:svg',
+                'background_image' =>'image',
                 'Address' =>'required| string',
                 'Address_en' => 'required| string',
                 'Address_hb'  => 'required| string',

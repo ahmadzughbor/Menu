@@ -36,16 +36,16 @@
                     <form id="productForm" name="productForm" class="form-horizontal">
                         @csrf
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label">title</label>
+                            <label for="name" class="col-sm-2 control-label">title en </label>
                             <div class="col-sm-12">
-                                <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" value="" maxlength="50" required="">
+                                <input type="text" class="form-control" id="title_en" name="title_en" placeholder="Enter title_en" value="" maxlength="50" required="">
                             </div>
                         </div>
                         <br>
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label">title en </label>
+                            <label for="name" class="col-sm-2 control-label">title ar</label>
                             <div class="col-sm-12">
-                                <input type="text" class="form-control" id="title_en" name="title_en" placeholder="Enter title_en" value="" maxlength="50" required="">
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" value="" maxlength="50" required="">
                             </div>
                         </div>
                         <br>
@@ -55,14 +55,7 @@
                                 <input type="text" class="form-control" id="title_hb" name="title_hb" placeholder="Enter title_hb" value="" maxlength="50" required="">
                             </div>
                         </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label">description</label>
-                            <div class="col-sm-12">
-
-                                <textarea class="form-control" id="description" name="description" placeholder="Enter Name"> </textarea>
-                            </div>
-                        </div>
+                        
                         <br>
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">description en</label>
@@ -72,6 +65,15 @@
                             </div>
                         </div>
                         <br>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">description ar</label>
+                            <div class="col-sm-12">
+
+                                <textarea class="form-control" id="description" name="description" placeholder="Enter Name"> </textarea>
+                            </div>
+                        </div>
+                        <br>
+                       
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">description hb</label>
                             <div class="col-sm-12">
@@ -83,14 +85,14 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">product cover</label>
                             <div class="col-sm-12">
-                                <input type="file" src="" id="cover" name="cover">
+                                <input type="file" id="cover" name="cover">
                             </div>
                         </div>
                         <br>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">product photos</label>
                             <div class="col-sm-12">
-                                <input type="file" multiple src="" id="photos" name="photos[]">
+                                <input type="file" multiple id="photos" name="photos[]">
                             </div>
                         </div>
 
@@ -178,20 +180,33 @@
         $(document).on('click', '.deleteproduct', function() {
 
             var product_id = $(this).data("productid");
-            confirm("Are You sure want to delete !");
+            Swal.fire({
+                title: 'Do you want to save the changes?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                denyButtonText: `Don't save`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire('Saved!', '', 'success')
 
-            $.ajax({
-                type: "DELETE",
-                url: "{{ route('product.delete') }}" + '/' + product_id,
-                success: function(data) {
-                    table.draw();
-                    toastr.success('done');
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ route('product.delete') }}" + '/' + product_id,
+                        success: function(data) {
+                            table.draw();
+                            toastr.success('تمت العملية بنجاح');
 
-                },
-                error: function(data) {
-                    toastr.error('error');
+                        },
+                        error: function(data) {
+                            toastr.error('فشلت العملية');
+                        }
+                    });
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
                 }
-            });
+            })
         });
 
         $('#saveBtn').click(function(e) {
@@ -212,7 +227,7 @@
                 success: function(data) {
 
                     $('#ajaxModel').modal('hide');
-                    toastr.success('done');
+                    toastr.success('تمت العملية بنجاح');
 
                     table.ajax.reload();
                 },

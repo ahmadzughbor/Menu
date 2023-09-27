@@ -26,9 +26,9 @@ class localization
               
         }else{
             $value = $this->getCookie('locale');  
-            app()->setLocale($value);
+            app()->setLocale($value ?? 'en');
             
-            
+                
         }
         
         return $next($request);

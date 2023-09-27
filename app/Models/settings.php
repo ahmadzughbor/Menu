@@ -13,6 +13,6 @@ class settings extends Model
     public $translatable = ['Address'];
 
     protected $fillable = [
-        'Address','Mobile','whatsapp_num','facebook','instagram','app_logo'
+        'Address','Mobile','whatsapp_num','facebook','instagram','app_logo','background_image'
     ];
 }

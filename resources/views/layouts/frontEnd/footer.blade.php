@@ -8,7 +8,7 @@
                  <div>
                      <h4>{{__('Address')}}</h4>
                      <p>
-                         Nazareth - Boulos 6th Street
+                        @isset($settings){{ $settings->getTranslation('Address',app()->getLocale()) }} @endisset
                      </p>
                  </div>
 
@@ -19,8 +19,8 @@
                  <div>
                      <h4>{{__('reservations')}}</h4>
                      <p>
-                         <strong>  {{__('Mobile')}} : </strong> <a href="tel:+972524847668">+972 52-484-7668</a><br>
-                         <strong> {{__('whatsapp')}} : </strong> <a target="_blank" href="https://wa.me/+972515010068">+972 51-501-0068</a><br>
+                         <strong>  {{__('Mobile')}} : </strong> <a href="tel:+972524847668">  @isset($settings)  {{$settings->Mobile}}  @endisset   </a><br>
+                         <strong> {{__('whatsapp')}} : </strong> <a target="_blank" href="https://wa.me/+972515010068"> @isset($settings) {{ $settings->whatsapp_num}}    @endisset  </a><br>
                          <br>
                      </p>
                  </div>
@@ -40,8 +40,8 @@
              <div class="col-lg-3 col-md-6 footer-links">
                  <h4>{{__('Followus')}}</h4>
                  <div class="social-links d-flex">
-                     <a target="" href="https://www.facebook.com/mokhtar.sweets.nazareth" class="facebook"><i class="bi bi-facebook"></i></a>
-                     <a target="" href="https://instagram.com/mokhtar.sweets.nazareth?igshid=NzZlODBkYWE4Ng==" class="instagram"><i class="bi bi-instagram"></i></a>
+                     <a target="" href="@isset($settings) {{$settings->facebook }} @endisset" class="facebook"><i class="bi bi-facebook"></i></a>
+                     <a target="" href=" @isset($settings) {{$settings->instagram }} @endisset " class="instagram"><i class="bi bi-instagram"></i></a>
                  </div>
              </div>
 

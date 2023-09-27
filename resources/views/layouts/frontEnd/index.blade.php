@@ -30,8 +30,13 @@ $assets = asset('frontEnd');
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
-    <!-- Template Main CSS File -->
+    @if(app()->getLocale() == 'ar')
+    <link href="{{ $assets }}/assets/css/style.rtl.css" rel="stylesheet">
+    
+    @endif
     <link href="{{ $assets }}/assets/css/main.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
 
 </head>
 
@@ -40,7 +45,7 @@ $assets = asset('frontEnd');
     <main id="main">
 
         <!-- ======= Breadcrumbs ======= -->
-        <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{ $assets }}/assets/img/cafee.jpg');">
+        <div class="breadcrumbs d-flex align-items-center" style="background-image: url({{asset('storage/images/' . $settings->background_image)}});">
             <div class="container position-relative text-center">
                 <img src="{{ $assets }}/assets/img/logo.png" alt="">
                 <div class="row justify-content-center">

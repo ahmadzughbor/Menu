@@ -7,7 +7,7 @@ use App\Models\uploads;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
-
+use Illuminate\Support\Str;
 class productController extends Controller
 {
     /**
@@ -36,8 +36,8 @@ class productController extends Controller
                 })
                 ->addColumn('action', function ($row) {
 
-                    $btn = '<a href="javascript:void(0)" data-productid="' . $row->id . '" data-url = "' . route('product.update', $row->id) . '" class="editproduct btn btn-primary btn-sm">edit</a>
-                           <a href="javascript:void(0)"  data-productid="' . $row->id . '" class="deleteproduct btn btn-primary btn-sm">delete</a> ';
+                    $btn = '<a href="javascript:void(0)" data-productid="' . $row->id . '" data-url = "' . route('product.update', $row->id) . '" class="editproduct"><?xml version="1.0" ?><svg class="feather feather-edit-3" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></a>
+                           <a href="javascript:void(0)"  data-productid="' . $row->id . '" class="deleteproduct "><?xml version="1.0" ?><svg class="feather feather-trash-2" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg></a> ';
 
                     return $btn;
                 })
@@ -71,8 +71,8 @@ class productController extends Controller
         $data = [];
         if ($request->file('cover')) {
             $file = $request->file('cover'); // Replace 'image' with your input name
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/images', $fileName);
+            $coverName = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/images', $coverName);
         }
         $data['title'] = [
             "ar" => $request->title,
@@ -84,7 +84,7 @@ class productController extends Controller
             "en" => $request->description_en,
             "hb" => $request->description_hb,
         ];
-        $data['cover'] =  $fileName;
+        $data['cover'] =  $coverName;
         // DB::transaction(function () use($data ,$request){
 
 
@@ -93,12 +93,13 @@ class productController extends Controller
             if ($request->file('photos')) {
                 $photos = $request->file('photos');
                 foreach ($photos as $photo) {
-                    $file = $photo; // Replace 'image' with your input name
-                    $fileName = time() . '.' . $file->getClientOriginalExtension();
-                    $file->storeAs('public/images', $fileName);
+                    // $file = $photo; // Replace 'image' with your input name
+                    $photosName =  Str::uuid() . '.' . $photo->getClientOriginalExtension();
+                    $photo->storeAs('public/images', $photosName);
+
                     uploads::create([
                         'product_id' => $product->id,
-                        'path' => $fileName
+                        'path' => $photosName
                     ]);
                 }
             }
@@ -145,11 +146,12 @@ class productController extends Controller
         $file = $request->file('cover'); // Replace 'file' with your input name
         if ($file) {
 
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $coverName = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/images', $coverName);
 
-            $file->storeAs('public/images', $fileName);
         } else {
-            $fileName = $product->cover;
+
+            $coverName = $product->cover;
         }
 
         $data = [];
@@ -164,23 +166,24 @@ class productController extends Controller
             "en" => $request->description_en,
             "hb" => $request->description_hb,
         ];
-        $data['cover'] =  $fileName;
+        $data['cover'] =  $coverName;
 
-        $product = $product->update($data);
+        $product->update($data);
 
         if ($request->file('photos')) {
             $product->uploads()->delete();
 
             $photos = $request->file('photos');
+            $index = 1;
             foreach ($photos as $photo) {
-                $file = $photo; // Replace 'image' with your input name
-                $fileName = time() . '.' . $file->getClientOriginalExtension();
-                $file->storeAs('public/images', $fileName);
+                $photoName =  Str::uuid() . '.' . $photo->getClientOriginalExtension();
+                $photo->storeAs('public/images', $photoName);
 
-                uploads::create([
+                $item = uploads::create([
                     'product_id' => $product->id,
-                    'path' => $fileName
+                    'path' => $photoName
                 ]);
+                $index++;
             }
         }
         return response()->json($product ,200);
@@ -193,10 +196,10 @@ class productController extends Controller
      */
     public function destroy($id)
     {
-        $item = product::find($id)->with('uploads');
-        $item->uploads->delete();
+        $item = product::with('uploads')->find($id);
+        $item->uploads()->delete();
         $item->delete();
 
-        return response()->json(['success' => 'say deleted successfully.']);
+        return response()->json(['success' => 'product deleted successfully.']);
     }
 }

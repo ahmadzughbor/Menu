@@ -39,7 +39,7 @@ $assets = asset('frontEnd');
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{ $assets }}/assets/img/cafee.jpg');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{asset('storage/images/' . $settings->background_image)}}');">
       <div class="container position-relative d-flex flex-column align-items-center">
 
         <img src="{{ $assets }}/assets/img/logo.png" alt>
@@ -60,12 +60,12 @@ $assets = asset('frontEnd');
             @foreach($items as $item )
             <div class="col-lg-4 col-md-6 portfolio-item">
               @foreach($item->uploads as $photo)
-              <a href="storage/images/{{$photo->path}}" data-gallery="{{$item->id}}" class="glightbox preview-link">
+              <a href="{{asset('storage/images/' .$photo->path)}}" data-gallery="{{$item->id}}" class="glightbox preview-link">
                   @endforeach
                   <img src="{{asset('storage/images/' . $item->cover)}}" class="img-fluid" alt><!-- cover img -->
                   <div class="portfolio-info">
-                    <h4>{{$item->getTranslation('title',  session('locale'))}}</h4>
-                    <p>{{$item->getTranslation('description',  session('locale'))}}</p>
+                    <h4>{{$item->getTranslation('title', app()->getLocale())}}</h4>
+                    <p>{{$item->getTranslation('description',  app()->getLocale())}}</p>
                     <!-- <h4>حلويات ساخنة</h4>
                   <p>حلويات دافئة ولذيذة ترضي الحواس.</p> -->
                   </div>

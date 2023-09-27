@@ -43,9 +43,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 });
 require __DIR__ . '/auth.php';
 
-Route::get('/{locale?}', function () {
-    return view('layouts.frontEnd.index');
-})->name('frontend.index');
+Route::get('/{locale?}',[frontendController::class, 'dashborad'])->name('frontend.index');
 
 
 

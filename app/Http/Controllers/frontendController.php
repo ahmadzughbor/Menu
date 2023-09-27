@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\product;
+use App\Models\settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
@@ -14,9 +15,14 @@ class frontendController extends Controller
     public function index()
     {
         $items = product::with('uploads')->get();
-        // dd(App::getLocale());
-        
-        return  view('frontend.menu',compact('items'));
+        $settings = settings::first(); 
+        return  view('frontend.menu',compact('items' ,'settings'));
+    }
+    public function dashborad()
+    {
+        $items = product::with('uploads')->get();
+        $settings = settings::first(); 
+        return  view('layouts.frontend.index',compact('items' ,'settings'));
     }
 
     /**
