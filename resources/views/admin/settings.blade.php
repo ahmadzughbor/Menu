@@ -10,19 +10,19 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="whatsappLink">Address  ar</label>
+                    <label for="Address">Address  ar</label>
                     <input type="text" value="@isset($settings) {{ $settings->getTranslation('Address', 'ar') }} @endisset " name="Address" class="form-control" id="Address" placeholder="Address">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="facebookLink">Address en</label>
+                    <label for="Address_en">Address en</label>
                     <input type="text" value="@isset($settings)  {{ $settings->getTranslation('Address', 'en') }}  @endisset " name="Address_en" class="form-control" id="Address_en" placeholder="Address_en ">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="facebookLink">Address hb</label>
+                    <label for="Address_hb">Address hb</label>
                     <input type="text" value="@isset($settings)  {{ $settings->getTranslation('Address', 'hb') }}  @endisset " name="Address_hb" class="form-control" id="Address_hb" placeholder="Address_hb ">
                 </div>
             </div>
@@ -30,13 +30,13 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="whatsappLink">WhatsApp number</label>
+                    <label for="whatsapp_num">WhatsApp number</label>
                     <input type="text" value="@isset($settings) {{ $settings->whatsapp_num }} @endisset " name="whatsapp_num" class="form-control" id="whatsapp_num" placeholder="WhatsApp number">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="facebookLink">mobile number</label>
+                    <label for="Mobile">mobile number</label>
                     <input type="text" value="@isset($settings) {{ $settings->Mobile }} @endisset " name="Mobile" class="form-control" id="Mobile" placeholder="Mobile number">
                 </div>
             </div>
@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="snapchatLink">app logo</label>
+                    <label for="app_logo">app logo</label>
 
                     <input type="file" name="app_logo" class="form-control" id="app_logo" placeholder="app_logo">
                 </div>
@@ -76,7 +76,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="snapchatLink">site background image</label>
+                    <label for="background_image">site background image</label>
 
                     <input type="file" name="background_image" class="form-control" id="background_image" placeholder="background_image">
                 </div>

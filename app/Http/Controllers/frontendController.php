@@ -22,7 +22,7 @@ class frontendController extends Controller
     {
         $items = product::with('uploads')->get();
         $settings = settings::first(); 
-        return  view('layouts.frontend.index',compact('items' ,'settings'));
+        return  view('layouts.frontEnd.index',compact('items' ,'settings'));
     }
 
     /**

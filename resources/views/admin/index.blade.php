@@ -181,11 +181,11 @@
 
             var product_id = $(this).data("productid");
             Swal.fire({
-                title: 'Do you want to save the changes?',
+                title: 'هل انت متاكد من عملية الحدف?',
                 showDenyButton: true,
                 showCancelButton: true,
-                confirmButtonText: 'Save',
-                denyButtonText: `Don't save`,
+                confirmButtonText: 'نعم',
+                denyButtonText: `لا`,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {

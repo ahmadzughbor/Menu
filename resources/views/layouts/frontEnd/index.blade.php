@@ -3,6 +3,7 @@
 @php
 $assets = asset('frontEnd');
 @endphp
+
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -12,8 +13,9 @@ $assets = asset('frontEnd');
     <meta content="Abu Al Saeed sweets" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/logo.png" rel="icon">
-    <link href="assets/img/logo.png" rel="apple-touch-icon">
+
+    <link href="{{asset('frontEnd/assets/img/logo.png')}}" rel="icon">
+    <link href="{{asset('frontEnd/assets/img/logo.png')}}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +34,7 @@ $assets = asset('frontEnd');
 
     @if(app()->getLocale() == 'ar')
     <link href="{{ $assets }}/assets/css/style.rtl.css" rel="stylesheet">
-    
+
     @endif
     <link href="{{ $assets }}/assets/css/main.css" rel="stylesheet">
 
@@ -47,7 +49,7 @@ $assets = asset('frontEnd');
         <!-- ======= Breadcrumbs ======= -->
         <div class="breadcrumbs d-flex align-items-center" style="background-image: url({{asset('storage/images/' . $settings->background_image)}});">
             <div class="container position-relative text-center">
-                <img src="{{ $assets }}/assets/img/logo.png" alt="">
+                <img src="{{asset('storage/images/' . $settings->app_logo)}}" alt="">
                 <div class="row justify-content-center">
                     <div class="col-md-2 col-8">
                         <div class="nice-select w-100 form-control" tabindex="0">
@@ -55,13 +57,19 @@ $assets = asset('frontEnd');
                             <ul class="list">
                                 <a href="{{route('frontend.index',[
                                     'locale'=> 'ar' 
-                                    ])}}"><li data-value="" class="option ind li active"> Arabic </li></a>
+                                    ])}}">
+                                    <li data-value="" class="option ind li active"> Arabic </li>
+                                </a>
                                 <a href="{{route('frontend.index',[
                                     'locale'=> 'en' 
-                                    ])}}"><li data-value="" class="option ind li active"> English </li></a>
+                                    ])}}">
+                                    <li data-value="" class="option ind li active"> English </li>
+                                </a>
                                 <a href="{{route('frontend.index',[
                                     'locale'=> 'hb' 
-                                    ])}}"><li data-value="" class="option ind li active"> Hebrew </li></a>
+                                    ])}}">
+                                    <li data-value="" class="option ind li active"> Hebrew </li>
+                                </a>
                             </ul>
                         </div>
                     </div>

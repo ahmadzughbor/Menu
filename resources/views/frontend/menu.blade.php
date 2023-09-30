@@ -13,8 +13,9 @@ $assets = asset('frontEnd');
   <meta content="حلويات ابو السعيد المختار" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/logo.png" rel="icon">
-  <link href="assets/img/logo.png" rel="apple-touch-icon">
+
+  <link href="{{asset('frontEnd/assets/img/logo.png')}}" rel="icon">
+  <link href="{{asset('frontEnd/assets/img/logo.png')}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +33,10 @@ $assets = asset('frontEnd');
   <!-- Template Main CSS File -->
   <link href="{{ $assets }}/assets/css/main.css" rel="stylesheet">
 
+  @if(app()->getLocale() == 'ar')
+  <link href="{{ $assets }}/assets/css/style.rtl.css" rel="stylesheet">
+
+  @endif
 </head>
 
 <body class="page-portfolio">
@@ -42,7 +47,7 @@ $assets = asset('frontEnd');
     <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{asset('storage/images/' . $settings->background_image)}}');">
       <div class="container position-relative d-flex flex-column align-items-center">
 
-        <img src="{{ $assets }}/assets/img/logo.png" alt>
+        <img src="{{asset('storage/images/' . $settings->app_logo)}}" alt>
       </div>
     </div><!-- End Breadcrumbs -->
 
@@ -61,15 +66,15 @@ $assets = asset('frontEnd');
             <div class="col-lg-4 col-md-6 portfolio-item">
               @foreach($item->uploads as $photo)
               <a href="{{asset('storage/images/' .$photo->path)}}" data-gallery="{{$item->id}}" class="glightbox preview-link">
-                  @endforeach
-                  <img src="{{asset('storage/images/' . $item->cover)}}" class="img-fluid" alt><!-- cover img -->
-                  <div class="portfolio-info">
-                    <h4>{{$item->getTranslation('title', app()->getLocale())}}</h4>
-                    <p>{{$item->getTranslation('description',  app()->getLocale())}}</p>
-                    <!-- <h4>حلويات ساخنة</h4>
+                @endforeach
+                <img src="{{asset('storage/images/' . $item->cover)}}" class="img-fluid" alt><!-- cover img -->
+                <div class="portfolio-info">
+                  <h4>{{$item->getTranslation('title', app()->getLocale())}}</h4>
+                  <p>{{$item->getTranslation('description', app()->getLocale())}}</p>
+                  <!-- <h4>حلويات ساخنة</h4>
                   <p>حلويات دافئة ولذيذة ترضي الحواس.</p> -->
-                  </div>
-                </a>
+                </div>
+              </a>
             </div><!-- End Portfolio Item -->
             @endforeach
 

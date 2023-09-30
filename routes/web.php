@@ -4,7 +4,7 @@ use App\Http\Controllers\frontendController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\settingsController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/generate-storage-link', function () {
+    Artisan::call('storage:link');
+    
+    return 'Storage link created successfully!';
+})->name('generate.storage.link');
+
+
 
 Route::get('/menu', [frontendController::class, 'index'])->name('menu');
 

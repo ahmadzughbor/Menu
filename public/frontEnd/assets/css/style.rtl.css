@@ -1,10 +1,11 @@
 /* rtl */
 @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100;200;300;400;500;600;700&family=Almarai:wght@300;400;700;800&family=Noto+Kufi+Arabic:wght@100;200;300;400;500;600;700&display=swap');
-/* font-family: 'Alexandria', sans-serif;
-font-family: 'Almarai', sans-serif;
-font-family: 'Noto Kufi Arabic', sans-serif; */
-/* Fonts */
 
+body{
+  direction: rtl;
+text-align: start;
+font-family: 'Almarai', sans-serif !important;
+}
 
 .nice-select {
     padding-left: 30px;
