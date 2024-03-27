@@ -99,7 +99,36 @@ class productController extends Controller
 
                     uploads::create([
                         'product_id' => $product->id,
-                        'path' => $photosName
+                        'path' => $photosName,
+                        'type' => 'en'
+                    ]);
+                }
+            }
+            if ($request->file('photos_ar')) {
+                $photos_ar = $request->file('photos_ar');
+                foreach ($photos_ar as $photo) {
+                    // $file = $photo; // Replace 'image' with your input name
+                    $photosName =  Str::uuid() . '.' . $photo->getClientOriginalExtension();
+                    $photo->storeAs('public/images', $photosName);
+
+                    uploads::create([
+                        'product_id' => $product->id,
+                        'path' => $photosName,
+                        'type' => 'ar'
+                    ]);
+                }
+            }
+            if ($request->file('photos_hb')) {
+                $photos_hb = $request->file('photos_hb');
+                foreach ($photos_hb as $photo) {
+                    // $file = $photo; // Replace 'image' with your input name
+                    $photosName =  Str::uuid() . '.' . $photo->getClientOriginalExtension();
+                    $photo->storeAs('public/images', $photosName);
+
+                    uploads::create([
+                        'product_id' => $product->id,
+                        'path' => $photosName,
+                        'type' => 'hb'
                     ]);
                 }
             }
@@ -174,16 +203,51 @@ class productController extends Controller
             $product->uploads()->delete();
 
             $photos = $request->file('photos');
-            $index = 1;
             foreach ($photos as $photo) {
                 $photoName =  Str::uuid() . '.' . $photo->getClientOriginalExtension();
                 $photo->storeAs('public/images', $photoName);
 
                 $item = uploads::create([
                     'product_id' => $product->id,
-                    'path' => $photoName
+                    'path' => $photoName,
+                    'type' => 'en'
+
                 ]);
-                $index++;
+
+            }
+        }
+        if ($request->file('photos_ar')) {
+            $product->uploadsAR()->delete();
+
+            $photos_ar = $request->file('photos_ar');
+            foreach ($photos_ar as $photo) {
+                $photoName =  Str::uuid() . '.' . $photo->getClientOriginalExtension();
+                $photo->storeAs('public/images', $photoName);
+
+                $item = uploads::create([
+                    'product_id' => $product->id,
+                    'path' => $photoName,
+                    'type' => 'ar'
+
+                ]);
+
+            }
+        }
+        if ($request->file('photos_hb')) {
+            $product->uploadsHB()->delete();
+
+            $photos_hb = $request->file('photos_hb');
+            foreach ($photos_hb as $photo) {
+                $photoName =  Str::uuid() . '.' . $photo->getClientOriginalExtension();
+                $photo->storeAs('public/images', $photoName);
+
+                $item = uploads::create([
+                    'product_id' => $product->id,
+                    'path' => $photoName,
+                    'type' => 'hb'
+
+                ]);
+
             }
         }
         return response()->json($product ,200);
@@ -197,7 +261,12 @@ class productController extends Controller
     public function destroy($id)
     {
         $item = product::with('uploads')->find($id);
+        if(!$item){
+            return response()->json(['error' => 'error in delete product ']); 
+        }
         $item->uploads()->delete();
+        $item->uploadsAR()->delete();
+        $item->uploadsHB()->delete();
         $item->delete();
 
         return response()->json(['success' => 'product deleted successfully.']);

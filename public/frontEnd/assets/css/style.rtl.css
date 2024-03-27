@@ -25,3 +25,7 @@ font-family: 'Almarai', sans-serif !important;
     padding-inline-start: 18px;
       padding-inline-end: 29px;
   }
+  .me-2 {
+    margin-left: 0.5rem!important;
+    margin-right: 0!important;
+  }

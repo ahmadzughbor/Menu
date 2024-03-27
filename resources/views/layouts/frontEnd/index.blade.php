@@ -8,7 +8,7 @@ $assets = asset('frontEnd');
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Abu Al Saeed sweets</title>
+    <title>{{__('AppTitle')}}</title>
     <meta content="Abu Al Saeed sweets" name="description">
     <meta content="Abu Al Saeed sweets" name="keywords">
 
@@ -81,15 +81,14 @@ $assets = asset('frontEnd');
         <section class=" py-5 ">
             <div class="container" data-aos="fade-up">
                 <div class="section-title">
-                    <span>{{ __('MoveToTheMenu')}}</span>
-                    <h2> {{__('MENU')}}</h2>
+                   
                 </div>
 
 
                 <div class="row justify-content-center my-5 ">
                     <div class="col-md-4 col-10">
                         <div class="text-center">
-                            <a href="{{route('menu')}}" class="navigate-to-menu">{{ __('MoveToTheMenu')}}</a>
+                            <a href="{{route('menu')}}" class="navigate-to-menu">{{$settings->getTranslation('navigate_menu', app()->getLocale())}}</a>
                             <!-- <a href="menu.html" class="navigate-to-menu-img">الانتقال الى المنيو</a> -->
                         </div>
                     </div>

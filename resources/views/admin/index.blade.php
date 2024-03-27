@@ -90,9 +90,23 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">product photos</label>
+                            <label class="col-sm-2 control-label">product  en photos</label>
                             <div class="col-sm-12">
                                 <input type="file" multiple id="photos" name="photos[]">
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">product ar photos</label>
+                            <div class="col-sm-12">
+                                <input type="file" multiple id="photos_ar" name="photos_ar[]">
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">product hb photos</label>
+                            <div class="col-sm-12">
+                                <input type="file" multiple id="photos_hb" name="photos_hb[]">
                             </div>
                         </div>
 
@@ -181,11 +195,11 @@
 
             var product_id = $(this).data("productid");
             Swal.fire({
-                title: 'هل انت متاكد من عملية الحدف?',
+                title: 'Are you sure about the deletion process?',
                 showDenyButton: true,
                 showCancelButton: true,
-                confirmButtonText: 'نعم',
-                denyButtonText: `لا`,
+                confirmButtonText: 'yes',
+                denyButtonText: `no`,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {

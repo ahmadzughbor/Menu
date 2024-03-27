@@ -11,7 +11,7 @@ class uploads extends Model
     protected $table ='uploads';
    
     protected $fillable = [
-        'product_id','path'
+        'product_id','path','type'
     ];
 
 

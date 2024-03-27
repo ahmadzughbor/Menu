@@ -1,5 +1,5 @@
 <meta charset="UTF-8">
-<title> حلويات ابو السعيد المختار </title>
+<title>{{__('AppTitle')}}</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <link href="{{asset('frontEnd/assets/img/logo.png')}}" rel="icon">

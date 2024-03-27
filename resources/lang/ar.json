@@ -2,11 +2,15 @@
 {
   "MENU": "قائمة",
   "Address": "العنوان",
-  "reservations": "التحفظات",
+  "reservations": "تواصل معنا",
   "workinghours": "ساعات العمل",
   "Followus": "تابعنا",
   "Mobile": "الهاتف",
   "whatsapp": "الواتساب",
-  "MoveToTheMenu": "انتقل الى قائمة طعام"
+  "MoveToTheMenu": "انتقل الى قائمة طعام",
+  "AppTitle": " حلويات ابو السعيد المختار ",
+  "Mon-Sat": "الاثنين-السبت",
+  "Sunday": "الاحد"
+
 
 }  

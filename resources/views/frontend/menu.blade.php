@@ -56,25 +56,35 @@ $assets = asset('frontEnd');
       @yield('content')
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <span>{{__('MENU')}}</span>
-          <h2>{{__('MENU')}}</h2>
+          
         </div>
         <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
 
           <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="300">
             @foreach($items as $item )
             <div class="col-lg-4 col-md-6 portfolio-item">
-              @foreach($item->uploads as $photo)
-              <a href="{{asset('storage/images/' .$photo->path)}}" data-gallery="{{$item->id}}" class="glightbox preview-link">
-                @endforeach
-                <img src="{{asset('storage/images/' . $item->cover)}}" class="img-fluid" alt><!-- cover img -->
-                <div class="portfolio-info">
-                  <h4>{{$item->getTranslation('title', app()->getLocale())}}</h4>
-                  <p>{{$item->getTranslation('description', app()->getLocale())}}</p>
-                  <!-- <h4>حلويات ساخنة</h4>
+              @if(app()->getLocale() == 'ar')
+                    @foreach($item->uploadsAR as $photo)
+                      <a href="{{asset('storage/images/' .$photo->path)}}" data-gallery="{{$item->id}}" class="glightbox preview-link">
+                    @endforeach
+              @elseif(app()->getLocale() == 'hb')
+                  @foreach($item->uploadsHB as $photo)
+                    <a href="{{asset('storage/images/' .$photo->path)}}" data-gallery="{{$item->id}}" class="glightbox preview-link">
+                  @endforeach
+              @else
+                  @foreach($item->uploads as $photo)
+                  <a href="{{asset('storage/images/' .$photo->path)}}" data-gallery="{{$item->id}}" class="glightbox preview-link">
+                  @endforeach
+              @endif
+
+                    <img src="{{asset('storage/images/' . $item->cover)}}" class="img-fluid" alt><!-- cover img -->
+                    <div class="portfolio-info">
+                      <h4>{{$item->getTranslation('title', app()->getLocale())}}</h4>
+                      <p>{{$item->getTranslation('description', app()->getLocale())}}</p>
+                      <!-- <h4>حلويات ساخنة</h4>
                   <p>حلويات دافئة ولذيذة ترضي الحواس.</p> -->
-                </div>
-              </a>
+                    </div>
+                  </a>
             </div><!-- End Portfolio Item -->
             @endforeach
 

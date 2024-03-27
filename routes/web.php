@@ -17,8 +17,13 @@ use Illuminate\Support\Facades\Artisan;
 */
 
 Route::get('/generate-storage-link', function () {
-    Artisan::call('storage:link');
-    
+    $publicPath = public_path('storage');
+    $storagePath = storage_path('app/public');
+
+    if (!file_exists($publicPath)) {
+        symlink($storagePath, $publicPath);
+    }
+
     return 'Storage link created successfully!';
 })->name('generate.storage.link');
 
@@ -51,7 +56,4 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 });
 require __DIR__ . '/auth.php';
 
-Route::get('/{locale?}',[frontendController::class, 'dashborad'])->name('frontend.index');
-
-
-
+Route::get('/{locale?}', [frontendController::class, 'dashborad'])->name('frontend.index');

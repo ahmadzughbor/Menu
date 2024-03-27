@@ -19,7 +19,15 @@ class product extends Model
 
     public function uploads (){
 
-        return $this->hasMany(uploads::class ,'product_id');
+        return $this->hasMany(uploads::class ,'product_id')->where('type','en');
+    }
+    public function uploadsAR (){
+
+        return $this->hasMany(uploads::class ,'product_id')->where('type','ar');
+    }
+    public function uploadsHB (){
+
+        return $this->hasMany(uploads::class ,'product_id')->where('type','hb');
     }
 
 }
